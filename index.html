@@ -1,0 +1,197 @@
+<!doctype html>
+<html>
+	<head>
+		<title>Design Studio</title>
+    <link href="https://fonts.googleapis.com/css?family=Inconsolata:700|Merriweather+Sans:400,700" rel="stylesheet">
+		<style>
+			* {
+			  box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      html, body { height: 100% }
+
+      body {
+        display: flex;
+        font-family: "Merriweather Sans", sans-serif;
+        font-size: 18px;
+        background: #222;
+        color: #F8F8F0;
+        margin: 0 auto;
+        flex-direction: column;
+        flex-wrap: nowrap;
+        align-items: stretch;
+        align-content: stretch;
+      }
+
+			header {
+			  width: 100%;
+        align-self: flex-start;
+        flex-basis: 75%;
+        position: relative;
+      }
+
+        .poster {
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+          padding: 3rem;
+          width: 100%;
+          max-width: 50rem;
+        }
+
+      h2 {
+        font-weight: 400;
+        font-size: 2rem;
+        color: #AD9568;
+      }
+
+      h1 {
+        font-size: 3rem;
+        letter-spacing: -1px;
+      }
+
+      p {
+        line-height: 1.5;
+        margin-top: 1rem;
+        max-width: 30rem;
+      }
+
+      nav {
+        width: 100%;
+        overflow: hidden;
+        align-self: flex-end;
+        flex-basis: 25%;
+        background: #1b1b1b;
+      }
+
+      time,
+      button {
+        display: inline-block;
+        border: 1px solid #222;
+        margin: 0;
+        height: 100%;
+        float: left;
+      }
+
+      time {
+        color: #444;
+        font-family: "Inconsolata", monospace;
+        font-weight: 700;
+        font-size: 7vw;
+        width: 40%;
+        height: 100%;
+        text-align: center;
+        line-height: 25vh;
+      }
+
+      button {
+        width: 20%;
+        font-family: "Merriweather Sans", sans-serif;
+        font-weight: 700;
+        font-size: 1rem;
+        text-transform: uppercase;
+        background: transparent;
+        padding: 1rem;
+        color: #444;
+      }
+
+        button span { font-weight: 400 }
+
+        button:hover,
+        button:active,
+        button:focus {
+          outline: none;
+          cursor: pointer;
+          border: 1px solid #AD9568;
+          color: #AD9568;
+        }
+
+      .reset {
+        display: none;
+        position: absolute;
+        text-align: center;
+        font-size: 5rem;
+        padding-top: calc(50vh - 2.5rem);
+        width: 100%;
+        height: 100%;
+        background: #1b1b1b;
+      }
+
+        .reset.visible {
+          display: block;
+        }
+
+        .reset:hover,
+        .reset:focus {
+          cursor: pointer;
+        }
+
+		</style>
+	</head>
+	<body>
+    <header>
+      <div class="poster">
+        <div>
+          <h2>Design Studio</h2>
+    		  <h1>Improving Developer Onboarding via the Web App</h1>
+          <p>The goal is to generate ideas to help developers be onboarded from within the web app.</p>
+        </div>
+      </div>
+		</header>
+
+    <nav class="timers">
+      <time id="time">10:00</time>
+      <button onclick="startCountdown('10');">Ideation <span>10min</span></button>
+      <button onclick="startCountdown('3');">Pitch <span>3min</span></button>
+      <button onclick="startCountdown('2');">Critique <span>2min</span></button>
+    </nav>
+
+    <div class="reset" onclick="toggleSession();">👏</div>
+
+    <script>
+      var secondsRemaining;
+      var intervalHandle;
+
+      var tick = function() {
+        var timeDisplay = document.getElementById('time');
+        var min = Math.floor(secondsRemaining / 60);
+        var sec = secondsRemaining - (min * 60);
+        if (sec < 10) { sec = '0' + sec }
+        var message = min.toString() + ':' + sec;
+        timeDisplay.innerHTML = message;
+        if (secondsRemaining === 0){
+          stopCountdown();
+          toggleSession();
+        }
+        secondsRemaining--;
+      }
+
+      var toggleSession = function() {
+        var clap = document.querySelector('.reset');
+        if (clap.classList.contains('visible')) {
+          clap.className = 'reset';
+        } else {
+          clap.className = 'reset visible';
+        }
+      }
+
+      var stopCountdown = function() {
+        clearInterval(intervalHandle);
+      }
+
+      var startCountdown = function(stop) {
+        stopCountdown();
+        var minutes = stop;
+        if (isNaN(minutes)){
+          alert('Please enter a number of minutes.');
+          return;
+        }
+        secondsRemaining = minutes * 60;
+        intervalHandle = setInterval(tick, 1000);
+      }
+    </script>
+	</body>
+</html>
