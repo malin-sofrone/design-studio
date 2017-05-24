@@ -9,9 +9,9 @@
     margin: 0;
     padding: 0;
   }
-  
+
   html, body { height: 100% }
-  
+
   body {
     display: flex;
     font-family: "Merriweather Sans", sans-serif;
@@ -24,14 +24,14 @@
     align-items: stretch;
     align-content: stretch;
   }
-  
+
   header {
     width: 100%;
     align-self: flex-start;
     flex-basis: 75%;
     position: relative;
   }
-  
+
   .poster {
     position: absolute;
     top: 50%;
@@ -41,24 +41,24 @@
     width: 100%;
     max-width: 50rem;
   }
-  
+
   h2 {
     font-weight: 400;
     font-size: 2rem;
     color: #AD9568;
   }
-  
+
   h1 {
     font-size: 3rem;
     letter-spacing: -1px;
   }
-  
+
   p {
     line-height: 1.5;
     margin-top: 1rem;
     max-width: 30rem;
   }
-  
+
   nav {
     width: 100%;
     overflow: hidden;
@@ -66,7 +66,7 @@
     flex-basis: 25%;
     background: #1b1b1b;
   }
-  
+
   time,
   button {
     display: inline-block;
@@ -75,7 +75,7 @@
     height: 100%;
     float: left;
   }
-  
+
   time {
     color: #444;
     font-family: "Inconsolata", monospace;
@@ -86,7 +86,7 @@
     text-align: center;
     line-height: 25vh;
   }
-  
+
   button {
     width: 20%;
     font-family: "Merriweather Sans", sans-serif;
@@ -97,9 +97,9 @@
     padding: 1rem;
     color: #444;
   }
-  
+
   button span { font-weight: 400 }
-  
+
   button:hover,
   button:active,
   button:focus {
@@ -108,7 +108,7 @@
     border: 1px solid #AD9568;
     color: #AD9568;
   }
-  
+
   .reset {
     display: none;
     position: absolute;
@@ -119,16 +119,16 @@
     height: 100%;
     background: #1b1b1b;
   }
-  
+
   .reset.visible {
     display: block;
   }
-  
+
   .reset:hover,
   .reset:focus {
     cursor: pointer;
   }
-  
+
   </style>
 </head>
 <body>
@@ -147,16 +147,16 @@
     <source id="player-src" src="arpeggio5lop-r1.wav" type="audio/wav">
       Your browser does not support the audio element.</source>
     </audio>
-    
+
     <nav class="timers">
       <time id="time">10:00</time>
       <button onclick="startCountdown('5');">Ideation <span>5min</span></button>
       <button onclick="startCountdown('3');">Pitch <span>3min</span></button>
       <button onclick="startCountdown('1');">Critique <span>1min</span></button>
     </nav>
-    
+
     <div class="reset" onclick="toggleSession();">👏</div>
-    
+
     <script>
     var secondsRemaining;
     var intervalHandle
@@ -175,7 +175,7 @@
       myAudio.load();
       myAudio.play();
     }
-    
+
     var tick = function() {
       var timeDisplay = document.getElementById('time');
       var min = Math.floor(secondsRemaining / 60);
@@ -190,7 +190,7 @@
       }
       secondsRemaining--;
     }
-    
+
     var toggleSession = function() {
       var clap = document.querySelector('.reset');
       if (clap.classList.contains('visible')) {
@@ -200,11 +200,11 @@
         clap.className = 'reset visible';
       }
     }
-    
+
     var stopCountdown = function() {
       clearInterval(intervalHandle);
     }
-    
+
     var startCountdown = function(stop) {
       stopCountdown();
       var minutes = stop;
